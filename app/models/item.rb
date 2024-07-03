@@ -11,8 +11,8 @@ class Item < ApplicationRecord
 
   validates :image, :title, :content,
            presence: true
-  validates :category_id, :delivery_price_id, :prefecture_id, :delivery_date_id, 
-           numericality: { other_than: 1 message: 'を選択してください' }
+  validates :category_id, :delivery_price_id, :prefecture_id, :delivery_date_id, :items_status_id, 
+           numericality: { other_than: 1 ,message: 'を選択してください' }
   validates :items_price, 
            presence: true, 
            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: '価格を¥300~¥9,999,999の間で設定してください'  }  
