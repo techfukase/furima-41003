@@ -11,6 +11,6 @@ FactoryBot.define do
     first_name            { person.first.kanji }
     last_name_kana        { person.last.katakana }
     first_name_kana       { person.first.katakana }
-    birthday              { Faker::Date.birthday(min_age: 18, max_age: 65) }    
+    birthday              { Faker::Date.birthday(min_age: 18, max_age: 65) }
   end
 end
