@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   def index
-    @order = Order.item.all
+    @order = Order.new
+    @address = Address.new
   end
 end
