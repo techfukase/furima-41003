@@ -8,9 +8,10 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    Address.create(address_params)
     if @order.valid?
       @order.save
-      return redirect_to root_path
+      redirect_to root_path
     else
       render :index, status: :unprocessable_entity
     end
@@ -18,7 +19,7 @@ class OrdersController < ApplicationController
 
   private
 
-  def order_params
-    params.require(:order).merge(user_id: current_user.id, item_id: params[:item_id])
-  end 
+  def address_params
+    params.permit(:post_number, :prefecture_id, :city, :number, :building, :phone_number).merge(order_id: @order.id)
+  end
 end
