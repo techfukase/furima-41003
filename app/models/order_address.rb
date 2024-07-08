@@ -1,14 +1,15 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_number, :prefecture_id, :city, :number, :building, :phone_number, :order_id, :token
+  attr_accessor :token, :user_id, :item_id, :post_number, :prefecture_id, :city, :number, :building, :phone_number, :order_id
 
   VALID_POST_NUMBER_REGEX = /\A\d{3}-\d{4}\z/
 
   with_options presence: true do
+    validates :token
     validates :user_id
     validates :item_id
 
-    validates :post_number, 
+    validates :post_number,
               format: { with: VALID_POST_NUMBER_REGEX, message: 'は「3桁ハイフン4桁」の形式で入力してください' }
 
     validates :prefecture_id,
@@ -19,8 +20,7 @@ class OrderAddress
 
     validates :phone_number,
               format: { with: /\A\d{10,11}\z/, message: 'はハイフンなしの半角数値で入力してください' }
-    
-    validates :token          
+              
   end
 
   def save
