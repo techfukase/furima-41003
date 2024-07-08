@@ -1,6 +1,6 @@
 class OrderAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_number, :prefecture_id, :city, :number, :building, :phone_number, :order_id
+  attr_accessor :user_id, :item_id, :post_number, :prefecture_id, :city, :number, :building, :phone_number, :order_id, :token
 
   VALID_POST_NUMBER_REGEX = /\A\d{3}-\d{4}\z/
 
@@ -19,6 +19,8 @@ class OrderAddress
 
     validates :phone_number,
               format: { with: /\A\d{10,11}\z/, message: 'はハイフンなしの半角数値で入力してください' }
+    
+    validates :token          
   end
 
   def save
