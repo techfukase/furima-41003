@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-  before_action :item_find, only: :index
 
   def index
+    @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
   end
 
