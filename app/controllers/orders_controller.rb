@@ -32,14 +32,14 @@ class OrdersController < ApplicationController
 
   def item_find
     @item = Item.find(params[:item_id])
-  
+  end
     
   def sold_out
     if @item.order.present?
       redirect_to root_path
     end
   end
-  
+
   def order_params
     params.require(:order_address).permit(:post_number, :prefecture_id, :city, :number, :building,
                                           :phone_number).merge(user_id: current_user.id, item_id: @item.id,
