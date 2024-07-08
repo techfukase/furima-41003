@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :item_find, only: [:index, :create]
   before_action :moved_top_page, only: [:index, :create]
+  before_action :sold_out, only: [:index, :create]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -31,6 +32,12 @@ class OrdersController < ApplicationController
 
   def item_find
     @item = Item.find(params[:item_id])
+  
+    
+  def sold_out
+    if @item.order.present?
+      redirect_to root_path
+    end
   end
   
   def order_params

@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, only: [:show, :edit, :update, :destroy]
   before_action :moved_top_page, only: :edit
+  before_action :sold_out, only: :edit
 
   def index
     @items = Item.order(created_at: :DESC)
@@ -56,6 +57,12 @@ class ItemsController < ApplicationController
 
   def moved_top_page
     unless current_user.id == @item.user_id
+      redirect_to root_path
+    end
+  end
+  
+  def sold_out
+    unless @item.order.present?
       redirect_to root_path
     end
   end
